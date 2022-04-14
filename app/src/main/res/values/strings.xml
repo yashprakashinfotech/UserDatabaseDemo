@@ -7,7 +7,6 @@
     <string name="user_form">User Form</string>
     <string name="userid">UserId</string>
     <string name="username">Username</string>
-    <string name="blood_group">Blood Group</string>
     <string name="submit">Submit</string>
     <string name="update">Update</string>
 </resources>
