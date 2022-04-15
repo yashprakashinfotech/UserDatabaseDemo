@@ -17,6 +17,10 @@ val colUserId = "userId"
 val colBloodGroup = "bloodGroup"
 
 class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, databaseName,null,1){
+
+    companion object{
+        var list : MutableList<User> = ArrayList()
+    }
     override fun onCreate(db: SQLiteDatabase?) {
 
         val createTable = "CREATE TABLE " + tableName +" ("+
@@ -53,7 +57,6 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, database
     @SuppressLint("Range")
     fun readData() : MutableList<User>{
 
-        var list : MutableList<User> = ArrayList()
 
         val db = this.readableDatabase
         val query = "Select * from $tableName"

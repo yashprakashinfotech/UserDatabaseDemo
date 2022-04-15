@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.userdatabasedemo.R
+import com.example.userdatabasedemo.database.DataBaseHandler
 import com.example.userdatabasedemo.database.User
 
-class UserAdapter(val context: Context, var userList : ArrayList<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(val context: Context, var userList : MutableList<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+//class UserAdapter(val context: Context, var userList : ArrayList<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val inflater : LayoutInflater = LayoutInflater.from(parent.context)
