@@ -1,5 +1,6 @@
 package com.example.userdatabasedemo.database
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -29,7 +30,7 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, database
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+
     }
 
 
@@ -47,6 +48,36 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, database
         else{
             Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
         }
+    }
+
+    @SuppressLint("Range")
+    fun readData() : MutableList<User>{
+
+        var list : MutableList<User> = ArrayList()
+
+        val db = this.readableDatabase
+        val query = "Select * from $tableName"
+        val result = db.rawQuery(query,null)
+
+        if (result.moveToFirst()){
+            do {
+                var user = User()
+//                user.username = result.getString(0)
+//                user.designation = result.getString(0)
+//                user.userId = result.getString(0)
+//                user.bloodGroup = result.getString(0)
+                user.username = result.getString(result.getColumnIndex(colUsername))
+                user.designation = result.getString(result.getColumnIndex(colDesignation))
+                user.userId = result.getString(result.getColumnIndex(colUserId))
+                user.bloodGroup = result.getString(result.getColumnIndex(colBloodGroup))
+                list.add(user)
+            }while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+
+        return list
     }
 
 }

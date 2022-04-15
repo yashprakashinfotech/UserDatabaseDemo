@@ -2,7 +2,7 @@ package com.example.userdatabasedemo.database
 
 class User {
 
-    var id : Int = 0
+//    var id : Int = 0
     var username : String = ""
     var designation : String = ""
     var userId : String = ""
@@ -14,4 +14,6 @@ class User {
         this.userId= userId
         this.bloodGroup = bloodGroup
     }
+
+    constructor(){}
 }

@@ -176,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:enabled="false"
+                android:enabled="true"
                 android:paddingHorizontal="35dp"
                 android:text="@string/update"
                 />
@@ -192,7 +192,15 @@
                 android:paddingHorizontal="35dp"
                 android:text="@string/submit"
                 />
+            <TextView
+                android:id="@+id/txtList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                />
         </LinearLayout>
+
+
 
 
 

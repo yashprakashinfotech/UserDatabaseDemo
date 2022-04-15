@@ -18,13 +18,14 @@ class FormActivity : AppCompatActivity() {
     private lateinit var btnSubmit : Button
     private lateinit var imgEdit : ImageView
     private lateinit var imgBack : ImageView
+    private lateinit var txtList : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
 
         initView()
 
-
+        var db = DataBaseHandler(this)
 
         btnSubmit.setOnClickListener {
             var username = etUsername.text.toString()
@@ -34,12 +35,22 @@ class FormActivity : AppCompatActivity() {
             if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(designation) && !TextUtils.isEmpty(userId) && !TextUtils.isEmpty(bloodGroup)){
 
                 var user = User(username,designation,userId,bloodGroup)
-                var db = DataBaseHandler(this)
+
                 db.insertData(user)
             }
             else{
                 Toast.makeText(this,"Please Fill All Data", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        btnUpdate.setOnClickListener {
+            val data = db.readData()
+            txtList.text = ""
+
+            for (i in 0 until (data.size)){
+                txtList.append(data[i].username + " " + data[i].designation + " " + data[i].userId + " " + data[i].bloodGroup + "\n" )
+            }
+
         }
 
     }
@@ -53,6 +64,7 @@ class FormActivity : AppCompatActivity() {
         btnSubmit = findViewById(R.id.btnSubmit)
         imgEdit = findViewById(R.id.imgEdit)
         imgBack = findViewById(R.id.imgBack)
+        txtList = findViewById(R.id.txtList)
     }
 
 }
