@@ -13,4 +13,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="alert_message">Are you sure you want to delete user ?</string>
+    <string name="data_not_available">Data not Available</string>
 </resources>
