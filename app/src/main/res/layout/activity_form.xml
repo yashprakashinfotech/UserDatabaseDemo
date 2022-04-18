@@ -136,7 +136,7 @@
                         android:layout_height="45dp"
                         android:background="@drawable/profile_edittext"
                         android:importantForAutofill="no"
-                        android:inputType="text"
+                        android:inputType="number"
                         tools:ignore="LabelFor,MissingConstraints,RtlSymmetry" />
 
                 </LinearLayout>
@@ -176,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:enabled="true"
+                android:enabled="false"
                 android:paddingHorizontal="35dp"
                 android:text="@string/update"
                 />

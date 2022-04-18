@@ -134,7 +134,7 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, database
                 userId = cursor.getString(cursor.getColumnIndex(colUserId))
                 bloodGroup = cursor.getString(cursor.getColumnIndex(colBloodGroup))
 
-                val users = UserModel(username = username,designation = designation,bloodGroup = bloodGroup)
+                val users = UserModel(username = username,designation = designation, userId = userId,bloodGroup = bloodGroup)
                 userList.add(users)
 
             }while (cursor.moveToNext())

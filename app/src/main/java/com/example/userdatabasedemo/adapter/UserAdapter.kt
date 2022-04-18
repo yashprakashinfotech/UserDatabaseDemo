@@ -1,20 +1,28 @@
 package com.example.userdatabasedemo.adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.userdatabasedemo.R
+import com.example.userdatabasedemo.activity.FormActivity
 import com.example.userdatabasedemo.database.UserModel
+import com.example.userdatabasedemo.helper.KeyClass
 
 //class UserAdapter() : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 //class UserAdapter(val context: Context, var userList : ArrayList<UserModel>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-class UserAdapter() : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(val context: Context) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var userList : ArrayList<UserModel> = ArrayList()
+    @SuppressLint("NotifyDataSetChanged")
     fun addItem(item: ArrayList<UserModel>){
         this.userList = item
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -27,6 +35,16 @@ class UserAdapter() : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
         val user = userList[position]
         holder.bindView(user)
+
+        holder.llUserView.setOnClickListener {
+            val i = Intent(context,FormActivity::class.java)
+            i.putExtra(KeyClass.KEY_USERNAME,user.username)
+            i.putExtra(KeyClass.KEY_DESIGNATION,user.designation)
+            i.putExtra(KeyClass.KEY_USER_ID,user.userId)
+            i.putExtra(KeyClass.KEY_BLOOD_GROUP,user.bloodGroup)
+            context.startActivity(i)
+        }
+
 //        holder.userName.text = user.username
 //        holder.userDesignation.text = user.designation
 //        holder.userId.text = user.userId
@@ -38,10 +56,11 @@ class UserAdapter() : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     }
 
     class UserViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        var userName : TextView = itemView.findViewById(R.id.userName)
-        var userDesignation : TextView = itemView.findViewById(R.id.userDesignation)
-        var userId : TextView = itemView.findViewById(R.id.userId)
-        var bloodGroup : TextView = itemView.findViewById(R.id.bloodGroup)
+        private var userName : TextView = itemView.findViewById(R.id.userName)
+        private var userDesignation : TextView = itemView.findViewById(R.id.userDesignation)
+        private var userId : TextView = itemView.findViewById(R.id.userId)
+        private var bloodGroup : TextView = itemView.findViewById(R.id.bloodGroup)
+        var llUserView : LinearLayout = itemView.findViewById(R.id.llUserView)
 
         fun bindView(user : UserModel){
             userName.text = user.username

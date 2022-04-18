@@ -1,12 +1,16 @@
 package com.example.userdatabasedemo.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.*
+import com.example.userdatabasedemo.MainActivity
 import com.example.userdatabasedemo.R
 import com.example.userdatabasedemo.database.DataBaseHandler
 import com.example.userdatabasedemo.database.UserModel
+import com.example.userdatabasedemo.helper.KeyClass
 
 class FormActivity : AppCompatActivity() {
 
@@ -20,6 +24,8 @@ class FormActivity : AppCompatActivity() {
     private lateinit var imgBack : ImageView
     private lateinit var txtList : TextView
 
+    private var isCameFrom = false
+
     private lateinit var dataBaseHandler: DataBaseHandler
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +38,38 @@ class FormActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        btnSubmit.setOnClickListener {
-            addUser()
+
+        val bundle = intent.extras
+        isCameFrom = bundle!!.getBoolean(KeyClass.KEY_CAME_FROM)
+
+        if (isCameFrom){
+            setAllFieldEnable()
+            imgEdit.visibility = View.GONE
+            btnUpdate.visibility = View.GONE
+
+            btnSubmit.setOnClickListener {
+                addUser()
+            }
         }
 
+        else{
+            val bundle : Bundle? = intent.extras!!
+            val userNameRV = bundle!!.getString(KeyClass.KEY_USERNAME)
+            val designationRV = bundle.getString(KeyClass.KEY_DESIGNATION)
+            val userIdRV = bundle.getString(KeyClass.KEY_USER_ID)
+            val bloodGroupRV = bundle.getString(KeyClass.KEY_BLOOD_GROUP)
+
+            etUsername.setText(userNameRV)
+            etDesignation.setText(designationRV)
+            etUserId.setText(userIdRV)
+            etBloodGroup.setText(bloodGroupRV)
+
+            btnSubmit.visibility = View.GONE
+            imgEdit.setOnClickListener {
+                setAllFieldEnable()
+
+            }
+        }
 //        btnUpdate.setOnClickListener {
 //            val data = dataBaseHandler.readData()
 //            txtList.text = ""
@@ -45,6 +79,17 @@ class FormActivity : AppCompatActivity() {
 //            }
 //
 //        }
+
+    }
+
+    private fun setAllFieldEnable(){
+
+        etUsername.isEnabled = true
+        etDesignation.isEnabled = true
+        etUserId.isEnabled = true
+        etBloodGroup.isEnabled = true
+        etBloodGroup.isEnabled = true
+        btnUpdate.isEnabled = true
 
     }
 
@@ -74,6 +119,8 @@ class FormActivity : AppCompatActivity() {
             val status =dataBaseHandler.insertData(user)
             if (status > -1){
                 Toast.makeText(this,"User Added", Toast.LENGTH_SHORT).show()
+                val i = Intent(this,MainActivity::class.java)
+                startActivity(i)
                 clearEditText()
             }
             else{

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.userdatabasedemo.activity.FormActivity
 import com.example.userdatabasedemo.adapter.UserAdapter
 import com.example.userdatabasedemo.database.*
+import com.example.userdatabasedemo.helper.KeyClass
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -27,10 +28,14 @@ class MainActivity : AppCompatActivity() {
 
         initView()
         initRecyclerView()
+        getUserData()
         fabAdd.setOnClickListener {
             val i = Intent(this,FormActivity::class.java)
+            i.putExtra(KeyClass.KEY_CAME_FROM,true)
             startActivity(i)
         }
+
+
 //        listDisplay()
 
 //        storeDataInArray()
@@ -40,16 +45,20 @@ class MainActivity : AppCompatActivity() {
         fabAdd = findViewById(R.id.fabAdd)
         userList = findViewById(R.id.userList)
         dataBaseHandler = DataBaseHandler(this)
+        userAdapter = UserAdapter(this)
     }
 
     private fun initRecyclerView() {
         userList.layoutManager = LinearLayoutManager(this)
-        userAdapter = UserAdapter()
+        userAdapter = UserAdapter(this)
         userList.adapter = userAdapter
     }
 
-    fun getUserData(){
+    private fun getUserData(){
         val userListData = dataBaseHandler.readAllData()
+
+        // Display Data in recyclerView
+        userAdapter.addItem(userListData)
     }
 
 //    private fun storeDataInArray(){
