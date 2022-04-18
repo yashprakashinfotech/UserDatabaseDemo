@@ -1,8 +1,10 @@
 package com.example.userdatabasedemo
 
 import android.content.Intent
+import android.content.LocusId
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.userdatabasedemo.activity.FormActivity
@@ -35,6 +37,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
 
+        userAdapter.setOnClickDeleteItem {
+            deleteUser(it.id)
+        }
 
 //        listDisplay()
 
@@ -61,28 +66,21 @@ class MainActivity : AppCompatActivity() {
         userAdapter.addItem(userListData)
     }
 
-//    private fun storeDataInArray(){
-//
-//        var cursor : Cursor = dataBaseHandler.readAllData()
-//
-//        if (cursor.count == 0){
-//            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show()
-//        }
-//        else{
-//
-//            while (cursor.moveToNext()){
-//                userNameArray.add(cursor.getString(0))
-//                designationArray.add(cursor.getString(1))
-//                userIdArray.add(cursor.getString(2))
-//                bloodGroupArray.add(cursor.getString(3))
-//
-//            }
-//        }
-//    }
+    private fun deleteUser(id: Int){
 
-//    private fun listDisplay(){
-//        userAdapter = UserAdapter(this,DataBaseHandler.list)
-//        userList.adapter = userAdapter
-//        userList.layoutManager = LinearLayoutManager(this)
-//    }
+        val profileAlertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        profileAlertDialog.setTitle(R.string.delete)
+        profileAlertDialog.setCancelable(true)
+        profileAlertDialog.setMessage(R.string.alert_message)
+        profileAlertDialog.setPositiveButton(R.string.yes) { dialog, _ ->
+            dataBaseHandler.deleteUserById(id)
+            getUserData()
+            dialog.dismiss()
+
+        }.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.dismiss()
+        }
+        profileAlertDialog.show()
+
+    }
 }

@@ -66,6 +66,16 @@ class DataBaseHandler(context: Context) : SQLiteOpenHelper(context, databaseName
         return success
     }
 
+    fun deleteUserById(id : Int) : Int{
+
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        cv.put(colId,id)
+        val result = db.delete(tableName,"id=$id",null)
+        db.close()
+        return result
+    }
+
     @SuppressLint("Recycle", "Range")
     fun readAllData(): ArrayList<UserModel> {
         val db = this.readableDatabase

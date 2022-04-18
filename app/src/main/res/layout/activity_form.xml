@@ -137,6 +137,7 @@
                         android:background="@drawable/profile_edittext"
                         android:importantForAutofill="no"
                         android:inputType="number"
+                        android:maxLength="6"
                         tools:ignore="LabelFor,MissingConstraints,RtlSymmetry" />
 
                 </LinearLayout>
