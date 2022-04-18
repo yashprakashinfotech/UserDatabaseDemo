@@ -38,6 +38,7 @@ class UserAdapter(val context: Context) : RecyclerView.Adapter<UserAdapter.UserV
 
         holder.llUserView.setOnClickListener {
             val i = Intent(context,FormActivity::class.java)
+            i.putExtra(KeyClass.KEY_ID,user.id)
             i.putExtra(KeyClass.KEY_USERNAME,user.username)
             i.putExtra(KeyClass.KEY_DESIGNATION,user.designation)
             i.putExtra(KeyClass.KEY_USER_ID,user.userId)

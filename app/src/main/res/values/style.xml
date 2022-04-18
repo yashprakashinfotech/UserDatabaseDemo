@@ -15,7 +15,6 @@
 
     </style>
 
-
     <style name="round_button_Style">
         <item name="cornerRadius">25dp</item>
         <item name="android:textSize">16sp</item>

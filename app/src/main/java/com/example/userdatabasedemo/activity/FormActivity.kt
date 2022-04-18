@@ -24,7 +24,15 @@ class FormActivity : AppCompatActivity() {
     private lateinit var imgBack : ImageView
     private lateinit var txtList : TextView
 
+    private var userModel: UserModel? =null
+
     private var isCameFrom = false
+    private var idRV = 0
+    private var userNameRV = ""
+    private var designationRV = ""
+    private var userIdRV = ""
+    private var bloodGroupRV = ""
+
 
     private lateinit var dataBaseHandler: DataBaseHandler
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +50,7 @@ class FormActivity : AppCompatActivity() {
         val bundle = intent.extras
         isCameFrom = bundle!!.getBoolean(KeyClass.KEY_CAME_FROM)
 
+        // Came For Add New User
         if (isCameFrom){
             setAllFieldEnable()
             imgEdit.visibility = View.GONE
@@ -54,10 +63,11 @@ class FormActivity : AppCompatActivity() {
 
         else{
             val bundle : Bundle? = intent.extras!!
-            val userNameRV = bundle!!.getString(KeyClass.KEY_USERNAME)
-            val designationRV = bundle.getString(KeyClass.KEY_DESIGNATION)
-            val userIdRV = bundle.getString(KeyClass.KEY_USER_ID)
-            val bloodGroupRV = bundle.getString(KeyClass.KEY_BLOOD_GROUP)
+            idRV = bundle!!.getInt(KeyClass.KEY_ID)
+            userNameRV = bundle.getString(KeyClass.KEY_USERNAME)!!
+            designationRV = bundle.getString(KeyClass.KEY_DESIGNATION)!!
+            userIdRV = bundle.getString(KeyClass.KEY_USER_ID)!!
+            bloodGroupRV = bundle.getString(KeyClass.KEY_BLOOD_GROUP)!!
 
             etUsername.setText(userNameRV)
             etDesignation.setText(designationRV)
@@ -67,7 +77,10 @@ class FormActivity : AppCompatActivity() {
             btnSubmit.visibility = View.GONE
             imgEdit.setOnClickListener {
                 setAllFieldEnable()
+            }
 
+            btnUpdate.setOnClickListener {
+                updateUser()
             }
         }
 //        btnUpdate.setOnClickListener {
@@ -107,15 +120,14 @@ class FormActivity : AppCompatActivity() {
 
     private fun addUser(){
 //        var id = 0
-        var username = etUsername.text.toString()
-        var designation = etDesignation.text.toString()
-        var userId = etUserId.text.toString()
-        var bloodGroup = etBloodGroup.text.toString()
+        val username = etUsername.text.toString()
+        val designation = etDesignation.text.toString()
+        val userId = etUserId.text.toString()
+        val bloodGroup = etBloodGroup.text.toString()
 
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(designation) && !TextUtils.isEmpty(userId) && !TextUtils.isEmpty(bloodGroup)){
 
-            var user = UserModel(username,designation,userId,bloodGroup)
-
+            val user = UserModel(username = username, designation = designation, userId = userId, bloodGroup = bloodGroup)
             val status =dataBaseHandler.insertData(user)
             if (status > -1){
                 Toast.makeText(this,"User Added", Toast.LENGTH_SHORT).show()
@@ -130,6 +142,50 @@ class FormActivity : AppCompatActivity() {
         else{
             Toast.makeText(this,"Please Fill All Data", Toast.LENGTH_SHORT).show()
         }
+
+    }
+
+    private fun updateUser(){
+        val username = etUsername.text.toString()
+        val designation = etDesignation.text.toString()
+        val userId = etUserId.text.toString()
+        val bloodGroup = etBloodGroup.text.toString()
+
+
+
+        if (
+            username == userNameRV &&
+            designation == designationRV &&
+            userId == userIdRV &&
+            bloodGroup == bloodGroupRV
+        ){
+            Toast.makeText(this,"Record not changed", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            val user = UserModel(id = idRV, username = username, designation = designation, userId = userId, bloodGroup = bloodGroup)
+            val status = dataBaseHandler.updateUser(user)
+
+            if (status > -1){
+                clearEditText()
+                val i = Intent(this,MainActivity::class.java)
+                startActivity(i)
+            }else{
+                Toast.makeText(this,"Update failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+//        else{
+//            val user = UserModel(username = username, designation = designation, userId = userId, bloodGroup = bloodGroup)
+//            val status = dataBaseHandler.updateUser(user)
+//
+//            if (status > -1){
+//                clearEditText()
+//                val i = Intent(this,MainActivity::class.java)
+//                startActivity(i)
+//            }else{
+//                Toast.makeText(this,"Update failed", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
     }
 
