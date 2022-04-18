@@ -24,8 +24,6 @@ class FormActivity : AppCompatActivity() {
     private lateinit var imgBack : ImageView
     private lateinit var txtList : TextView
 
-    private var userModel: UserModel? =null
-
     private var isCameFrom = false
     private var idRV = 0
     private var userNameRV = ""
@@ -62,12 +60,12 @@ class FormActivity : AppCompatActivity() {
         }
 
         else{
-            val bundle : Bundle? = intent.extras!!
-            idRV = bundle!!.getInt(KeyClass.KEY_ID)
-            userNameRV = bundle.getString(KeyClass.KEY_USERNAME)!!
-            designationRV = bundle.getString(KeyClass.KEY_DESIGNATION)!!
-            userIdRV = bundle.getString(KeyClass.KEY_USER_ID)!!
-            bloodGroupRV = bundle.getString(KeyClass.KEY_BLOOD_GROUP)!!
+            val bundle1 : Bundle? = intent.extras!!
+            idRV = bundle1!!.getInt(KeyClass.KEY_ID)
+            userNameRV = bundle1.getString(KeyClass.KEY_USERNAME)!!
+            designationRV = bundle1.getString(KeyClass.KEY_DESIGNATION)!!
+            userIdRV = bundle1.getString(KeyClass.KEY_USER_ID)!!
+            bloodGroupRV = bundle1.getString(KeyClass.KEY_BLOOD_GROUP)!!
 
             etUsername.setText(userNameRV)
             etDesignation.setText(designationRV)
@@ -83,16 +81,6 @@ class FormActivity : AppCompatActivity() {
                 updateUser()
             }
         }
-//        btnUpdate.setOnClickListener {
-//            val data = dataBaseHandler.readData()
-//            txtList.text = ""
-//
-//            for (i in 0 until (data.size)){
-//                txtList.append(data[i].username + " " + data[i].designation + " " + data[i].userId + " " + data[i].bloodGroup + "\n" )
-//            }
-//
-//        }
-
     }
 
     private fun setAllFieldEnable(){
@@ -119,7 +107,6 @@ class FormActivity : AppCompatActivity() {
     }
 
     private fun addUser(){
-//        var id = 0
         val username = etUsername.text.toString()
         val designation = etDesignation.text.toString()
         val userId = etUserId.text.toString()
@@ -173,19 +160,6 @@ class FormActivity : AppCompatActivity() {
                 Toast.makeText(this,"Update failed", Toast.LENGTH_SHORT).show()
             }
         }
-
-//        else{
-//            val user = UserModel(username = username, designation = designation, userId = userId, bloodGroup = bloodGroup)
-//            val status = dataBaseHandler.updateUser(user)
-//
-//            if (status > -1){
-//                clearEditText()
-//                val i = Intent(this,MainActivity::class.java)
-//                startActivity(i)
-//            }else{
-//                Toast.makeText(this,"Update failed", Toast.LENGTH_SHORT).show()
-//            }
-//        }
 
     }
 

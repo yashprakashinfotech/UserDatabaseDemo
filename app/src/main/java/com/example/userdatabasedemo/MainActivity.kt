@@ -1,7 +1,6 @@
 package com.example.userdatabasedemo
 
 import android.content.Intent
-import android.content.LocusId
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -20,10 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userAdapter : UserAdapter
     private lateinit var dataBaseHandler : DataBaseHandler
 
-//    lateinit var userNameArray : ArrayList<String>
-//    lateinit var designationArray : ArrayList<String>
-//    lateinit var userIdArray : ArrayList<String>
-//    lateinit var bloodGroupArray : ArrayList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,10 +35,6 @@ class MainActivity : AppCompatActivity() {
         userAdapter.setOnClickDeleteItem {
             deleteUser(it.id)
         }
-
-//        listDisplay()
-
-//        storeDataInArray()
     }
 
     private fun initView(){

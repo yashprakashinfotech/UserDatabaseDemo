@@ -1,7 +1,6 @@
 package com.example.userdatabasedemo.adapter
 
 import android.annotation.SuppressLint
-import android.content.ComponentCallbacks
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -16,9 +15,7 @@ import com.example.userdatabasedemo.activity.FormActivity
 import com.example.userdatabasedemo.database.UserModel
 import com.example.userdatabasedemo.helper.KeyClass
 
-//class UserAdapter() : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-//class UserAdapter(val context: Context, var userList : ArrayList<UserModel>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-class UserAdapter(val context: Context) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val context: Context) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var userList : ArrayList<UserModel> = ArrayList()
     private var onClickDeleteItem : ((UserModel)-> Unit)? = null
