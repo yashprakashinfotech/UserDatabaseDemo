@@ -7,7 +7,11 @@
     <string name="user_form">User Form</string>
     <string name="userid">UserId</string>
     <string name="username">Username</string>
-    <string name="blood_group">Blood Group</string>
     <string name="submit">Submit</string>
     <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="alert_message">Are you sure you want to delete user ?</string>
+    <string name="data_not_available">Data not Available</string>
 </resources>

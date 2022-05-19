@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -7,61 +8,83 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="5dp"
         android:backgroundTint="@color/light_blue"
-        app:cardCornerRadius="15dp"
-        >
+        app:cardCornerRadius="15dp">
 
         <LinearLayout
             android:id="@+id/llUserView"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            tools:ignore="DisableBaselineAlignment">
 
-            <TextView
-                android:id="@+id/userName"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/name" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/userDesignation"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/designation" />
+                <TextView
+                    android:id="@+id/userName"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/name" />
 
-            <TextView
-                android:id="@+id/userId"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/user_id" />
+                <TextView
+                    android:id="@+id/userDesignation"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/designation" />
 
-            <TextView
-                android:id="@+id/bloodGroup"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/blood_group" />
+                <TextView
+                    android:id="@+id/userId"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/user_id" />
+
+                <TextView
+                    android:id="@+id/bloodGroup"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/blood_group" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2">
+
+                <ImageView
+                    android:id="@+id/icDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
